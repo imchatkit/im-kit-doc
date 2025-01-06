@@ -1,0 +1,142 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/24.7.8 Chrome/128.0.6613.36 Electron/32.0.1 Safari/537.36" version="24.7.8">
+  <diagram name="完整架构设计" id="complete-arch">
+    <mxGraphModel dx="1434" dy="836" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="1">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" value="ImKit 完整架构设计" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=24;fontStyle=1" parent="1" vertex="1">
+          <mxGeometry x="400" y="20" width="300" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="client_layer" value="客户端层" style="swimlane;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;rounded=1;shadow=1;fontSize=14;fontStyle=1;startSize=30;gradientColor=#ffffff" parent="1" vertex="1">
+          <mxGeometry x="40" y="80" width="200" height="320" as="geometry" />
+        </mxCell>
+        <mxCell id="mobile_sdk" value="移动端SDK" style="swimlane;whiteSpace=wrap;html=1;rounded=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=12" parent="client_layer" vertex="1">
+          <mxGeometry x="20" y="40" width="160" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="mobile_components" value="- 消息收发管理&#xa;- 会话管理&#xa;- 离线消息同步&#xa;- 已读回执&#xa;- 消息加密" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=11;" parent="mobile_sdk" vertex="1">
+          <mxGeometry y="26" width="160" height="84" as="geometry" />
+        </mxCell>
+        <mxCell id="web_sdk" value="Web/PC SDK" style="swimlane;whiteSpace=wrap;html=1;rounded=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=12" parent="client_layer" vertex="1">
+          <mxGeometry x="20" y="180" width="160" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="web_components" value="- WebSocket连接&#xa;- 消息处理&#xa;- UI组件&#xa;- 本地存储&#xa;- 状态管理" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=11;" parent="web_sdk" vertex="1">
+          <mxGeometry y="26" width="160" height="84" as="geometry" />
+        </mxCell>
+        <mxCell id="gateway_layer" value="接入层" style="swimlane;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;rounded=1;shadow=1;fontSize=14;fontStyle=1;startSize=30;gradientColor=#ffffff" parent="1" vertex="1">
+          <mxGeometry x="280" y="80" width="240" height="320" as="geometry" />
+        </mxCell>
+        <mxCell id="ws_gateway" value="WebSocket网关" style="swimlane;whiteSpace=wrap;html=1;rounded=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=12" parent="gateway_layer" vertex="1">
+          <mxGeometry x="20" y="40" width="200" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="ws_features" value="- 长连接管理&#xa;- 消息编解码&#xa;- 心跳检测&#xa;- 断线重连&#xa;- 消息ACK&#xa;- 流量控制&#xa;- 在线状态管理" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=11;" parent="ws_gateway" vertex="1">
+          <mxGeometry y="26" width="200" height="104" as="geometry" />
+        </mxCell>
+        <mxCell id="http_gateway" value="HTTP API网关" style="swimlane;whiteSpace=wrap;html=1;rounded=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=12" parent="gateway_layer" vertex="1">
+          <mxGeometry x="20" y="190" width="200" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="http_features" value="- 用户认证&#xa;- 业务API&#xa;- 负载均衡&#xa;- 限流熔断&#xa;- 日志监控" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=11;" parent="http_gateway" vertex="1">
+          <mxGeometry y="26" width="200" height="84" as="geometry" />
+        </mxCell>
+        <mxCell id="service_layer" value="业务层" style="swimlane;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;rounded=1;shadow=1;fontSize=14;fontStyle=1;startSize=30;gradientColor=#ffffff" parent="1" vertex="1">
+          <mxGeometry x="560" y="80" width="560" height="320" as="geometry" />
+        </mxCell>
+        <mxCell id="msg_service" value="消息服务" style="swimlane;whiteSpace=wrap;html=1;rounded=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=12" parent="service_layer" vertex="1">
+          <mxGeometry x="20" y="40" width="160" height="270" as="geometry" />
+        </mxCell>
+        <mxCell id="msg_features" value="消息类型:&#xa;- 文本消息&#xa;- 图片消息&#xa;- 语音消息&#xa;- 视频消息&#xa;- 文件消息&#xa;- 位置消息&#xa;- 引用消息&#xa;- 撤回消息&#xa;- 已读回执&#xa;- 系统通知&#xa;- 自定义消息" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=11;" parent="msg_service" vertex="1">
+          <mxGeometry y="26" width="160" height="234" as="geometry" />
+        </mxCell>
+        <mxCell id="conv_service" value="会话服务" style="swimlane;whiteSpace=wrap;html=1;rounded=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=12" parent="service_layer" vertex="1">
+          <mxGeometry x="200" y="40" width="160" height="270" as="geometry" />
+        </mxCell>
+        <mxCell id="conv_features" value="会话管理:&#xa;- 单聊会话&#xa;- 群聊会话&#xa;- 系统会话&#xa;- 置顶会话&#xa;- 免打扰设置&#xa;- 会话同步&#xa;- 未读人数计数&#xa;- 最近联系人&#xa;- 在线状态&#xa;- 已读标记&#xa;- 消息搜索" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=11;" parent="conv_service" vertex="1">
+          <mxGeometry y="26" width="160" height="234" as="geometry" />
+        </mxCell>
+        <mxCell id="group_service" value="群组服务" style="swimlane;whiteSpace=wrap;html=1;rounded=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=12" parent="service_layer" vertex="1">
+          <mxGeometry x="380" y="40" width="160" height="270" as="geometry" />
+        </mxCell>
+        <mxCell id="group_features" value="群组功能:&#xa;- 创建群组&#xa;- 解散群组&#xa;- 群成员管理&#xa;- 群角色权限&#xa;- 群公告&#xa;- 群消息免打扰&#xa;- 群成员禁言&#xa;- @功能&#xa;- 群组同步&#xa;- 群组搜索&#xa;- 群组设置" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=11;" parent="group_service" vertex="1">
+          <mxGeometry y="26" width="160" height="234" as="geometry" />
+        </mxCell>
+        <mxCell id="storage_layer" value="存储层" style="swimlane;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;rounded=1;shadow=1;fontSize=14;fontStyle=1;startSize=30;gradientColor=#ffffff" parent="1" vertex="1">
+          <mxGeometry x="40" y="440" width="1080" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="mysql" value="MySQL" style="swimlane;whiteSpace=wrap;html=1;rounded=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=12" parent="storage_layer" vertex="1">
+          <mxGeometry x="20" y="40" width="200" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="mysql_tables" value="核心表:&#xa;- 用户表&#xa;- 会话表&#xa;- 群组表&#xa;- 关系表" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=11;" parent="mysql" vertex="1">
+          <mxGeometry y="26" width="200" height="74" as="geometry" />
+        </mxCell>
+        <mxCell id="redis" value="Redis" style="swimlane;whiteSpace=wrap;html=1;rounded=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=12" parent="storage_layer" vertex="1">
+          <mxGeometry x="240" y="40" width="200" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="redis_features" value="缓存数据:&#xa;- 用户会话&#xa;- 消息队列&#xa;- 计数器&#xa;- 在线状态" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=11;" parent="redis" vertex="1">
+          <mxGeometry y="26" width="200" height="74" as="geometry" />
+        </mxCell>
+        <mxCell id="mongodb" value="MongoDB" style="swimlane;whiteSpace=wrap;html=1;rounded=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=12" parent="storage_layer" vertex="1">
+          <mxGeometry x="460" y="40" width="200" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="mongodb_features" value="消息存储:&#xa;- 历史消息&#xa;- 群消息&#xa;- 系统消息&#xa;- 离线消息" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=11;" parent="mongodb" vertex="1">
+          <mxGeometry y="26" width="200" height="74" as="geometry" />
+        </mxCell>
+        <mxCell id="minio" value="MinIO" style="swimlane;whiteSpace=wrap;html=1;rounded=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=12" parent="storage_layer" vertex="1">
+          <mxGeometry x="680" y="40" width="180" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="minio_features" value="文件存储:&#xa;- 图片&#xa;- 语音&#xa;- 视频&#xa;- 文件" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=11;" parent="minio" vertex="1">
+          <mxGeometry y="26" width="180" height="74" as="geometry" />
+        </mxCell>
+        <mxCell id="es" value="Elasticsearch" style="swimlane;whiteSpace=wrap;html=1;rounded=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=12" parent="storage_layer" vertex="1">
+          <mxGeometry x="880" y="40" width="180" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="es_features" value="搜索服务:&#xa;- 消息搜索&#xa;- 群组搜索&#xa;- 用户搜索&#xa;- 全文检索" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=11;" parent="es" vertex="1">
+          <mxGeometry y="26" width="180" height="74" as="geometry" />
+        </mxCell>
+        <mxCell id="infra_layer" value="基础设施层" style="swimlane;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;rounded=1;shadow=1;fontSize=14;fontStyle=1;startSize=30;gradientColor=#ffffff" parent="1" vertex="1">
+          <mxGeometry x="40" y="640" width="1080" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="nacos" value="Nacos" style="swimlane;whiteSpace=wrap;html=1;rounded=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=12" parent="infra_layer" vertex="1">
+          <mxGeometry x="20" y="40" width="200" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="nacos_features" value="服务治理:&#xa;- 服务注册&#xa;- 服务发现&#xa;- 配置管理&#xa;- 服务健康检查" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=11;" parent="nacos" vertex="1">
+          <mxGeometry y="26" width="200" height="74" as="geometry" />
+        </mxCell>
+        <mxCell id="rocketmq" value="RocketMQ" style="swimlane;whiteSpace=wrap;html=1;rounded=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=12" parent="infra_layer" vertex="1">
+          <mxGeometry x="240" y="40" width="200" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="rocketmq_features" value="消息队列:&#xa;- 消息分发&#xa;- 消息持久化&#xa;- 顺序消息&#xa;- 消息重试" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=11;" parent="rocketmq" vertex="1">
+          <mxGeometry y="26" width="200" height="74" as="geometry" />
+        </mxCell>
+        <mxCell id="sentinel" value="Sentinel" style="swimlane;whiteSpace=wrap;html=1;rounded=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=12" parent="infra_layer" vertex="1">
+          <mxGeometry x="460" y="40" width="200" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="sentinel_features" value="流量控制:&#xa;- 限流&#xa;- 熔断&#xa;- 系统保护&#xa;- 实时监控" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=11;" parent="sentinel" vertex="1">
+          <mxGeometry y="26" width="200" height="74" as="geometry" />
+        </mxCell>
+        <mxCell id="skywalking" value="SkyWalking" style="swimlane;whiteSpace=wrap;html=1;rounded=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=12" parent="infra_layer" vertex="1">
+          <mxGeometry x="680" y="40" width="180" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="skywalking_features" value="链路追踪:&#xa;- 分布式追踪&#xa;- 性能指标&#xa;- 应用拓扑&#xa;- 告警通知" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=11;" parent="skywalking" vertex="1">
+          <mxGeometry y="26" width="180" height="74" as="geometry" />
+        </mxCell>
+        <mxCell id="prometheus" value="Prometheus" style="swimlane;whiteSpace=wrap;html=1;rounded=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=12" parent="infra_layer" vertex="1">
+          <mxGeometry x="880" y="40" width="180" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="prometheus_features" value="监控告警:&#xa;- 性能监控&#xa;- 资源监控&#xa;- 业务监控&#xa;- 告警规则" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=11;" parent="prometheus" vertex="1">
+          <mxGeometry y="26" width="180" height="74" as="geometry" />
+        </mxCell>
+        <mxCell id="arrow1" value="" style="endArrow=classic;startArrow=classic;html=1;rounded=1;edgeStyle=orthogonalEdgeStyle;curved=1;strokeWidth=1.5;strokeColor=#808080;dashed=1;shadow=0" parent="1" source="client_layer" target="gateway_layer" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arrow2" value="" style="endArrow=classic;startArrow=classic;html=1;rounded=1;edgeStyle=orthogonalEdgeStyle;curved=1;strokeWidth=1.5;strokeColor=#808080;dashed=1;shadow=0" parent="1" source="gateway_layer" target="service_layer" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arrow3" value="" style="endArrow=classic;startArrow=classic;html=1;rounded=1;edgeStyle=orthogonalEdgeStyle;curved=1;strokeWidth=1.5;strokeColor=#808080;dashed=1;shadow=0" parent="1" source="service_layer" target="storage_layer" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arrow4" value="" style="endArrow=classic;startArrow=classic;html=1;rounded=1;edgeStyle=orthogonalEdgeStyle;curved=1;strokeWidth=1.5;strokeColor=#808080;dashed=1;shadow=0" parent="1" source="storage_layer" target="infra_layer" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

@@ -1,0 +1,138 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/24.7.8 Chrome/128.0.6613.36 Electron/32.0.1 Safari/537.36" version="24.7.8">
+  <diagram name="消息收发流程(优化版)" id="msg-flow-optimized">
+    <mxGraphModel dx="1247" dy="1127" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="1">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" value="消息收发流程" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=24;fontStyle=1" parent="1" vertex="1">
+          <mxGeometry x="665" y="-15" width="162" height="41" as="geometry" />
+        </mxCell>
+        <mxCell id="sender_lane" value="发送方" style="swimlane;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;rounded=1;shadow=1;fontSize=14;fontStyle=1;startSize=30" parent="1" vertex="1">
+          <mxGeometry x="40" y="80" width="200" height="800" as="geometry" />
+        </mxCell>
+        <mxCell id="sender_client" value="客户端" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666" parent="sender_lane" vertex="1">
+          <mxGeometry x="40" y="50" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="gateway_lane" value="接入层" style="swimlane;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;rounded=1;shadow=1;fontSize=14;fontStyle=1;startSize=30" parent="1" vertex="1">
+          <mxGeometry x="280" y="80" width="200" height="800" as="geometry" />
+        </mxCell>
+        <mxCell id="ws_gateway" value="WebSocket网关&#xa;(长连接管理)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666" parent="gateway_lane" vertex="1">
+          <mxGeometry x="40" y="50" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="session_manager" value="会话管理器&#xa;(在线状态)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666" parent="gateway_lane" vertex="1">
+          <mxGeometry x="40" y="120" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="service_lane" value="业务层" style="swimlane;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;rounded=1;shadow=1;fontSize=14;fontStyle=1;startSize=30" parent="1" vertex="1">
+          <mxGeometry x="520" y="80" width="200" height="800" as="geometry" />
+        </mxCell>
+        <mxCell id="msg_validator" value="消息校验服务" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666" parent="service_lane" vertex="1">
+          <mxGeometry x="40" y="50" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="msg_processor" value="消息处理服务" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666" parent="service_lane" vertex="1">
+          <mxGeometry x="40" y="120" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="msg_dispatcher" value="消息分发服务" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666" parent="service_lane" vertex="1">
+          <mxGeometry x="40" y="190" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="sync_service" value="多端同步服务" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666" parent="service_lane" vertex="1">
+          <mxGeometry x="40" y="279" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="mq_lane" value="消息队列" style="swimlane;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;rounded=1;shadow=1;fontSize=14;fontStyle=1;startSize=30" parent="1" vertex="1">
+          <mxGeometry x="760" y="80" width="200" height="800" as="geometry" />
+        </mxCell>
+        <mxCell id="msg_queue" value="RocketMQ&#xa;消息分发队列" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666" parent="mq_lane" vertex="1">
+          <mxGeometry x="40" y="50" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="offline_queue" value="离线消息队列" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666" parent="mq_lane" vertex="1">
+          <mxGeometry x="46" y="233" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="storage_lane" value="存储层" style="swimlane;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;rounded=1;shadow=1;fontSize=14;fontStyle=1;startSize=30" parent="1" vertex="1">
+          <mxGeometry x="1000" y="80" width="200" height="800" as="geometry" />
+        </mxCell>
+        <mxCell id="redis_store" value="Redis&#xa;在线状态/消息ID" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;size=15;fillColor=#f5f5f5;strokeColor=#666666" parent="storage_lane" vertex="1">
+          <mxGeometry x="40" y="50" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="mysql_store" value="MySQL&#xa;关系数据" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;size=15;fillColor=#f5f5f5;strokeColor=#666666" parent="storage_lane" vertex="1">
+          <mxGeometry x="40" y="152" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="flow6" value="" style="endArrow=classic;html=1;rounded=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.25;entryDx=0;entryDy=0;edgeStyle=orthogonalEdgeStyle;curved=1" parent="storage_lane" target="receiver_client" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-320" y="216" as="sourcePoint" />
+            <mxPoint x="282" y="394" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="-320" y="206" />
+              <mxPoint x="-19" y="206" />
+              <mxPoint x="-19" y="306" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="flow6_label" value="6. 在线推送" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[]" parent="flow6" vertex="1" connectable="0">
+          <mxGeometry x="-0.2" relative="1" as="geometry">
+            <mxPoint x="-202" y="-9" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="receiver_lane" value="接收方" style="swimlane;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;rounded=1;shadow=1;fontSize=14;fontStyle=1;startSize=30" parent="1" vertex="1">
+          <mxGeometry x="1240" y="80" width="200" height="800" as="geometry" />
+        </mxCell>
+        <mxCell id="receiver_client" value="客户端" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666" parent="receiver_lane" vertex="1">
+          <mxGeometry x="44" y="296" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="flow1" value="" style="endArrow=classic;html=1;rounded=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;edgeStyle=orthogonalEdgeStyle;curved=1" parent="1" source="sender_client" target="ws_gateway" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="flow1_label" value="1. 发送消息" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[]" parent="flow1" vertex="1" connectable="0">
+          <mxGeometry x="-0.2" relative="1" as="geometry">
+            <mxPoint y="-10" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="flow2" value="" style="endArrow=classic;html=1;rounded=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;edgeStyle=orthogonalEdgeStyle;curved=1" parent="1" source="ws_gateway" target="msg_validator" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="flow2_label" value="2. 消息校验&#xa;- 敏感词过滤&#xa;- 权限校验&#xa;- 频率限制&#xa;- 黑名单校验" style="edgeLabel;html=1;align=left;verticalAlign=middle;resizable=0;points=[]" parent="flow2" vertex="1" connectable="0">
+          <mxGeometry x="-0.2" relative="1" as="geometry">
+            <mxPoint x="-16" y="37" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="flow3" value="" style="endArrow=classic;html=1;rounded=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;edgeStyle=orthogonalEdgeStyle;curved=1" parent="1" source="msg_validator" target="msg_processor" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="flow3_label" value="3. 消息处理&#xa;- 生成消息ID&#xa;- 设置时间戳&#xa;- 消息分类" style="edgeLabel;html=1;align=left;verticalAlign=middle;resizable=0;points=[]" parent="flow3" vertex="1" connectable="0">
+          <mxGeometry x="-0.2" relative="1" as="geometry">
+            <mxPoint x="10" y="10" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="flow4" value="" style="endArrow=classic;html=1;rounded=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;edgeStyle=orthogonalEdgeStyle;curved=1" parent="1" source="msg_processor" target="mysql_store" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="680" y="254" />
+              <mxPoint x="815" y="254" />
+              <mxPoint x="815" y="250" />
+              <mxPoint x="1100" y="250" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="flow4_label" value="4. 消息持久化" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[]" parent="flow4" vertex="1" connectable="0">
+          <mxGeometry x="-0.2" relative="1" as="geometry">
+            <mxPoint x="10" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="flow5" value="" style="endArrow=classic;html=1;rounded=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;edgeStyle=orthogonalEdgeStyle;curved=1" parent="1" source="msg_processor" target="msg_queue" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="flow5_label" value="5. 进入消息队列" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[]" parent="flow5" vertex="1" connectable="0">
+          <mxGeometry x="-0.2" relative="1" as="geometry">
+            <mxPoint x="11" y="-38" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="flow7" value="" style="endArrow=classic;html=1;rounded=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;edgeStyle=orthogonalEdgeStyle;curved=1" parent="1" source="msg_dispatcher" target="offline_queue" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="flow7_label" value="7. 离线存储" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[]" parent="flow7" vertex="1" connectable="0">
+          <mxGeometry x="-0.2" relative="1" as="geometry">
+            <mxPoint x="10" as="offset" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
